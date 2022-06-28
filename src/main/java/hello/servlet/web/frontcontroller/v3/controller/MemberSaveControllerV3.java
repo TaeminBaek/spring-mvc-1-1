@@ -12,12 +12,8 @@ public class MemberSaveControllerV3 implements ControllerV3 {
 
     @Override
     public ModelView process(Map<String, String> paramMap) {
-        String userName = paramMap.get("userName");
-        int age = Integer.parseInt(paramMap.get("age"));
-
-        Member member = new Member(userName, age);
+        Member member = new Member(paramMap.get("userName"), Integer.parseInt(paramMap.get("age")));
         memberRepository.save(member);
-
         ModelView mv = new ModelView("save-result");
         mv.getModel().put("member", member);
         return mv;

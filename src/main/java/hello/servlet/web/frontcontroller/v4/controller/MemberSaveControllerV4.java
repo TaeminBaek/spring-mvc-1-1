@@ -13,7 +13,6 @@ public class MemberSaveControllerV4 implements ControllerV4 {
     public String process(Map<String, String> paramMap, Map<String, Object> model) {
         Member member = new Member(paramMap.get("userName"), Integer.parseInt(paramMap.get("age")));
         memberRepository.save(member);
-
         model.put("member", member);
         return "save-result";
     }

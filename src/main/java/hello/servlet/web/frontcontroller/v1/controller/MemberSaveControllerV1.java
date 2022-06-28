@@ -15,16 +15,10 @@ public class MemberSaveControllerV1 implements ControllerV1 {
 
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("userName");
-        int age = Integer.parseInt(req.getParameter("age"));
-
-        Member member = new Member(userName, age);
+        Member member = new Member(req.getParameter("userName"), Integer.parseInt(req.getParameter("age")));
         memberRepository.save(member);
-
         req.setAttribute("member", member);
-
-        String viewPath = "/WEB-INF/views/save-result.jsp";
-        RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/save-result.jsp");
         dispatcher.forward(req, resp);
     }
 }

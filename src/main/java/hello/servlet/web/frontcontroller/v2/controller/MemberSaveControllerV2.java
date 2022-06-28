@@ -5,7 +5,6 @@ import hello.servlet.domain.member.MemberRepository;
 import hello.servlet.web.frontcontroller.MyView;
 import hello.servlet.web.frontcontroller.v2.ControllerV2;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,14 +15,9 @@ public class MemberSaveControllerV2 implements ControllerV2 {
 
     @Override
     public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("userName");
-        int age = Integer.parseInt(req.getParameter("age"));
-
-        Member member = new Member(userName, age);
+        Member member = new Member(req.getParameter("userName"), Integer.parseInt(req.getParameter("age")));
         memberRepository.save(member);
-
         req.setAttribute("member", member);
-
         return new MyView("/WEB-INF/views/save-result.jsp");
     }
 }
